@@ -1,7 +1,7 @@
 package com.company;
 
 /**
- * Created by RENT on 2017-06-22.
+ * Created by zz9ffd on 2017-06-23.
  */
 public class Game {
 
@@ -44,23 +44,27 @@ public class Game {
 		for(int i = 0; i < LEN; i++){
 			for(int j = 0; j < LEN; j++){
 				score = score + gameMap[i][j];
-				}
 			}
-        if(score == GameController.P1 * Game.LEN)
-			return GameController.P1;
-		if(score == GameController.P2 * Game.LEN)
-			return GameController.P2;
+			if(score == GameController.P1 * Game.LEN)
+				return GameController.P1;
+			if(score == GameController.P2 * Game.LEN)
+				return GameController.P2;
+			score = 0;
+		}
+
 
 		// Check horizontal ---------------------
 		for(int j = 0; j < LEN; j++){
 			for(int i = 0; i < LEN; i++){
 				score = score + gameMap[i][j];
 			}
+			if(score == GameController.P1 * Game.LEN)
+				return GameController.P1;
+			if(score == GameController.P2 * Game.LEN)
+				return GameController.P2;
+			score = 0;
 		}
-		if(score == GameController.P1 * Game.LEN)
-			return GameController.P1;
-		if(score == GameController.P2 * Game.LEN)
-			return GameController.P2;
+
 
 		// Check diagonal left to right ----------
 		for(int i = 0; i < LEN; i++){
@@ -70,15 +74,17 @@ public class Game {
 			return GameController.P1;
 		if(score == GameController.P2 * Game.LEN)
 			return GameController.P2;
-
+		score = 0;
 		// Check diagonal right to left ----------
-		for(int i = LEN-1; i >= 0; i--){
-			score = score + gameMap[i][i];
+		//System.out.println("score before = " + score);
+		for(int i = 0; i < LEN; i++){
+			score = score + gameMap[(LEN-1)-i][i];
 		}
 		if(score == GameController.P1 * Game.LEN)
 			return GameController.P1;
 		if(score == GameController.P2 * Game.LEN)
 			return GameController.P2;
+		//System.out.println("score after = " + score);
 
 		return 0;
 	}

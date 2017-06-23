@@ -1,11 +1,14 @@
 package com.company;
 
 /**
- * Created by RENT on 2017-06-22.
+ * Created by zz9ffd on 2017-06-23.
  */
 public class Printer {
 
 	public void print(int gameMap[][]){
+
+		int count = 0;
+		int val;
 
 		System.out.print("\n\n");
 
@@ -13,15 +16,28 @@ public class Printer {
 
 			for(int i = 0; i < Game.LEN; i++){
 
-				System.out.print(getSymbol(gameMap[i][j]));
+				count++;
+				val = gameMap[i][j];
+
+				if(val == GameController.P1 || val == GameController.P2) {
+					System.out.print(getSymbol(val));
+				}
+				else {
+					System.out.print(count);
+				}
+
 				if(i < Game.LEN - 1){
 					System.out.print("|");
 				} else {
 					System.out.print("\n");
 				}
 			}
+
 			if(j < Game.LEN - 1) {
-				System.out.print("-----\n");
+				for(int i = 0; i < (Game.LEN * 2) - 1; i++) {
+					System.out.print("-");
+				}
+				System.out.print("\n");
 			}
 
 		}
