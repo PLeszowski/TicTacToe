@@ -3,13 +3,10 @@ package com.company;
 import java.util.InputMismatchException;
 import java.util.Scanner;
 
-/**
- * Created by zz9ffd on 2017-06-23.
- */
 public class GameController {
 
-	public static final int P1 = 1;
-	public static final int P2 = 10;
+	static final int P1 = 1;
+	static final int P2 = 10;
 	public static int TOTAL_MOVES = Game.LEN * Game.LEN;
 	private int currentPlayer = P2;
 
@@ -28,31 +25,26 @@ public class GameController {
 		int count = 0;
 
 		do {
-
 			count++;
-
-			if (currentPlayer == P1) {
-				currentPlayer = P2;
-			} else {
-				currentPlayer = P1;
-			}
-
+			currentPlayer = switchPlayer(currentPlayer);
 			playerPlay(currentPlayer);
 
 		} while (game.isDone() == 0 && count < TOTAL_MOVES);
 
 		printer.print(game.getGameMap());
 
-		if(count < TOTAL_MOVES)
+		if(count < TOTAL_MOVES) {
 			System.out.println("Player " + printer.getSymbol(currentPlayer) + " YOU WIN!");
-		else
+		}
+		else {
 			System.out.println("Its a tie");
+		}
 	}
 
 	private void playerPlay(int player) {
 
 		int x, y;
-		int val;
+		int value;
 		int[] coordinates;
 
 		printer.print(game.getGameMap());
@@ -62,27 +54,25 @@ public class GameController {
 
 			do {
 				try {
-					val = sc.nextInt();
+					value = sc.nextInt();
 				} catch (InputMismatchException e) {
-					val = 0;
+					value = 0;
 					sc.next();
 				}
 
-				if (val < 1 || val > TOTAL_MOVES) {
+				if (value < 1 || value > TOTAL_MOVES) {
 					System.out.println("Please enter value between 1 and " + TOTAL_MOVES);
-					val = 0;
+					value = 0;
 				}
 
-			} while (val < 1 || val > TOTAL_MOVES);
+			} while (value < 1 || value > TOTAL_MOVES);
 
-			coordinates = getCoordinates(val);
+			coordinates = getCoordinates(value);
 
 			x = coordinates[0];
 			y = coordinates[1];
 
 		} while (!game.makeMove(x, y, player));
-
-
 	}
 
 	private int[] getCoordinates(int val) {
@@ -97,6 +87,17 @@ public class GameController {
 		coordinates[1] = y;
 
 		return coordinates;
+	}
+
+	private int switchPlayer (int player){
+
+		if (player == P1) {
+			player = P2;
+		} else {
+			player = P1;
+		}
+
+		return player;
 	}
 
 }

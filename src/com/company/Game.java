@@ -1,8 +1,5 @@
 package com.company;
 
-/**
- * Created by zz9ffd on 2017-06-23.
- */
 public class Game {
 
 	private int player;
